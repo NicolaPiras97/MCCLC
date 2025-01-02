@@ -49,7 +49,7 @@ int main2(vector<vector<int>> yy){
 
     int _L,_H,_R,_K,_Q,_iter,_iter0,_iter3,_starting,_burn,_thinn;
     _L=4;
-    _H=3;
+    _H=2;
     _R=2;
     _iter=800;
     _iter0=2000;
@@ -2135,6 +2135,6 @@ int main2(vector<vector<int>> yy){
 
     auto end = chrono::steady_clock::now();
     int elapsed_time = chrono::duration_cast<chrono::seconds>(end - start).count();
-    std::cout << "Tempo impiegato: " << elapsed_time << " sec" << std::endl;
+    std::cout << "Time: " << elapsed_time << " sec" << std::endl;
 
 }
