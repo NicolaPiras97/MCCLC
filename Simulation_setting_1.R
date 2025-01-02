@@ -50,20 +50,20 @@ nq<-13
 
 n=K*nk*Q
 
-dati <- matrix(nrow=n,ncol=3) 
-dati[,1] <- seq(1:n)
+data <- matrix(nrow=n,ncol=3) 
+data[,1] <- seq(1:n)
 d1<-NULL
 for(k in 1:K){
   d1<-c(d1,rep(k,nk*Q))
 }
 
-dati[,2]<-d1
+data[,2]<-d1
 d2<-NULL
 for(k in 1:K){
   d2<-c(d2,rep(seq(1:Q),nq))
 }
 
-dati[,3]<-d2
+data[,3]<-d2
 
 colr<-NULL
 colr<-c(colr,rep(components2,nq*K))
@@ -71,43 +71,43 @@ colh<-NULL
 for(i in 1:(K)){
   colh<-c(colh,rep(components[i],nk*Q))
 }
-datic<-cbind(dati,colh,colr)
+datac<-cbind(data,colh,colr)
 
 
 colh_out <- cbind(colh_out, colh)
 colr_out <- cbind(colr_out, colr)
 
-daticc<-datic[order(datic[,4],datic[,5]),]
-dati<-daticc[,1:3]
+datacc<-datac[order(datac[,4],datac[,5]),]
+data<-datacc[,1:3]
 
-conteggio<-c(length(which(components==1))*length(which(components2==1))*nk,length(which(components==1))*length(which(components2==2))*nk,length(which(components==2))*length(which(components2==1))*nk,length(which(components==2))*length(which(components2==2))*nk)
+count<-c(length(which(components==1))*length(which(components2==1))*nk,length(which(components==1))*length(which(components2==2))*nk,length(which(components==2))*length(which(components2==1))*nk,length(which(components==2))*length(which(components2==2))*nk)
 
 
-dati2<-NULL
+data2<-NULL
 samples2 <- NULL
 w <- 1
 for(j in (1:H)){
   for(m in (1:R)){
-    samples <- sample(1:L,prob=c(pl[seq(j,H*L,H),m]),size=conteggio[w],replace=TRUE) 
-    for(i in (1:conteggio[w])){
-      dati2p = cbind(sample(0:(c1-1),prob=p1[,samples[i]],size=1),sample(0:(c1-1),prob=p2[,samples[i]],size=1),sample(0:(c2-1),prob=p3[,samples[i]],size=1),sample(0:(c2-1),prob=p4[,samples[i]],size=1),sample(0:(c3-1),prob=p5[,samples[i]],size=1),sample(0:(c3-1),prob=p6[,samples[i]],size=1))
-      dati2=rbind(dati2,dati2p)
+    samples <- sample(1:L,prob=c(pl[seq(j,H*L,H),m]),size=count[w],replace=TRUE) 
+    for(i in (1:count[w])){
+      data2p = cbind(sample(0:(c1-1),prob=p1[,samples[i]],size=1),sample(0:(c1-1),prob=p2[,samples[i]],size=1),sample(0:(c2-1),prob=p3[,samples[i]],size=1),sample(0:(c2-1),prob=p4[,samples[i]],size=1),sample(0:(c3-1),prob=p5[,samples[i]],size=1),sample(0:(c3-1),prob=p6[,samples[i]],size=1))
+      data2=rbind(data2,data2p)
     } 
     samples2<-c(samples2,samples)  
     w=w+1    
   }
 }
-dati<-cbind(dati,dati2)  
-datic<-cbind(dati,samples2)
+data<-cbind(data,data2)  
+datac<-cbind(data,samples2)
 
 
-a<-order(dati[,2],dati[,3])
+a<-order(data[,2],data[,3])
 s<-NULL
-for(i in 1:(dim(dati)[1])){
-  s<-rbind(s,dati[a[i],])
+for(i in 1:(dim(data)[1])){
+  s<-rbind(s,data[a[i],])
 }
 s<-as.matrix(s)
-dati<-s
+data<-s
 
 
 y<-list(s[1,])
