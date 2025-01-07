@@ -1,8 +1,9 @@
+#Code for simulation scenario 1
 library(Rcpp)
 library(RcppEigen)
 library(RcppArmadillo)
-Rcpp::sourceCpp("MCCLC_full_categorical.cpp")
-#Rcpp::sourceCpp("MCCLC_hybrid_categorical.cpp")
+Rcpp::sourceCpp("MCCLC_full_categorical.cpp") #full SEM-Gibbs
+#Rcpp::sourceCpp("MCCLC_hybrid_categorical.cpp") #hybrid SEM-Gibbs
 
 L <- 4
 R <- H <- 2
@@ -12,7 +13,6 @@ ph <- c(0.625,0.375)
 pr <- c(0.25,0.75)
 
 pxwz<-matrix(c(0.4,0.3,0.2,0.1,0.15,0.05,0.35,0.45,0.05,0.55,0.15,0.25,0.3,0.05,0.5,0.15),nrow=H*R,ncol=L,byrow=T)
-pl<-matrix(c(0.4,0.05,0.3,0.55,0.2,0.15,0.1,0.25,0.15,0.3,0.05,0.05,0.35,0.5,0.45,0.15),nrow=L*H,ncol=R)
 
 c1=2
 c2=3
@@ -30,14 +30,14 @@ S <- 100
 for(s in 1:S){
 
 components<-rep(0,K)
-while(length(which(components==1))!=round(K*ph[1])){
+while(length(which(components==1))!=round(K*ph[1])){ #remove for simulation scheme i. (random sampling of memberships of level-2 units)
   components <- sample(1:H,prob=ph,size=K,replace=TRUE)      
 }
 
 components_out <- cbind(components_out, components)
 
 components2<-rep(0,Q)
-while(length(which(components2==1))!=round(Q*pr[1])){
+while(length(which(components2==1))!=round(Q*pr[1])){ #remove for simulation scheme i. (random sampling of memberships of level-2 units)
   components2 <- sample(1:R,prob=pr,size=Q,replace=TRUE)      
 }
 
@@ -89,7 +89,7 @@ samples2 <- NULL
 w <- 1
 for(j in (1:H)){
   for(m in (1:R)){
-    samples <- sample(1:L,prob=c(pl[seq(j,H*L,H),m]),size=count[w],replace=TRUE) 
+    samples <- sample(1:L,prob=pxwz[w,],size=conteggio[w],replace=TRUE) 
     for(i in (1:count[w])){
       data2p = cbind(sample(0:(c1-1),prob=p1[,samples[i]],size=1),sample(0:(c1-1),prob=p2[,samples[i]],size=1),sample(0:(c2-1),prob=p3[,samples[i]],size=1),sample(0:(c2-1),prob=p4[,samples[i]],size=1),sample(0:(c3-1),prob=p5[,samples[i]],size=1),sample(0:(c3-1),prob=p6[,samples[i]],size=1))
       data2=rbind(data2,data2p)
