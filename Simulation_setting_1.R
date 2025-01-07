@@ -2,6 +2,7 @@ library(Rcpp)
 library(RcppEigen)
 library(RcppArmadillo)
 Rcpp::sourceCpp("MCCLC_full_categorical.cpp")
+#Rcpp::sourceCpp("MCCLC_hybrid_categorical.cpp")
 
 L <- 4
 R <- H <- 2
