@@ -1226,32 +1226,7 @@ int main2(vector<vector<int>> yy){
             }
         }
 
-               for (int j = 0; j < _n; j++) {
-            for (int l = 0; l < _L; l++) {
-                _xjkq(j, l) = 0;
-            }
-        }
-
-        for (int j = 0; j < _n; j++) {
-            boost::random::discrete_distribution<int> distribution6(_Prob3.row(j).begin(), _Prob3.row(j).end());
-            int sample = distribution6(generator);
-            _xjkq(j, sample) = 1;
-        }
-
-        for (int h = 0; h < _H; h++) {
-            for (int r = 0; r < _R; r++) {
-                _den4(h, r) = 0;
-            }
-        }
-        for (int h = 0; h < _H; h++) {
-            for (int r = 0; r < _R; r++) {
-                for (int j = 0; j < _n; j++) {
-                    _den4(h, r) += _B(j, h, r);
-                }
-            }
-        }
-
-        for (int l = 0; l < _L; l++) {
+                  for (int l = 0; l < _L; l++) {
             for (int h = 0; h < _H; h++) {
                 for (int r = 0; r < _R; r++) {
                     _num4(l, h, r) = 0;
@@ -1263,8 +1238,23 @@ int main2(vector<vector<int>> yy){
             for (int h = 0; h < _H; h++) {
                 for (int r = 0; r < _R; r++) {
                     for (int j = 0; j < _n; j++) {
-                        _num4(l, h, r) += _B(j, h, r) * _xjkq(j, l);
+                        if(_B(j,h,r)==1) {
+                            _num4(l, h, r) += _Prob3(j, l);
+                        }
                     }
+                }
+            }
+        }
+
+        for (int h = 0; h < _H; h++) {
+            for (int r = 0; r < _R; r++) {
+                _den4(h, r) = 0;
+            }
+        }
+        for (int h = 0; h < _H; h++) {
+            for (int r = 0; r < _R; r++) {
+                for (int l = 0; l < _L; l++) {
+                    _den4(h, r) += _num4(l, h, r);
                 }
             }
         }
@@ -1317,23 +1307,23 @@ int main2(vector<vector<int>> yy){
                         for (int r = 0; r < _R; r++) {
                             for (int j = 0; j < _n; j++) {
                                 if(_dephr[i]==3) {
-                                    if (y(j, i + 3) == c && _xjkq(j, l) == 1 && _B(j, h, r) == 1) {
-                                        _num5(i, c, l, h, r) += 1;
+                                    if (y(j, i + 3) == c && _B(j, h, r) == 1) {
+                                        _num5(i, c, l, h, r) += _Prob3(j,l);
                                     }
                                 }
                                 else if(_dephr[i]==2){
-                                    if (y(j, i + 3) == c && _xjkq(j, l) == 1 && _zjq(j,r)==1) {
-                                        _num5(i, c, l, h, r) += 1;
+                                    if (y(j, i + 3) == c  && _zjq(j,r)==1) {
+                                        _num5(i, c, l, h, r) += _Prob3(j,l);
                                     }
                                 }
                                 else if(_dephr[i]==1){
-                                    if (y(j, i + 3) == c && _xjkq(j, l) == 1 && _wjk(j,h)==1) {
-                                        _num5(i, c, l, h, r) += 1;
+                                    if (y(j, i + 3) == c &&  _wjk(j,h)==1) {
+                                        _num5(i, c, l, h, r) += _Prob3(j,l);
                                     }
                                 }
                                 else if(_dephr[i]==0){
-                                    if (y(j, i + 3) == c && _xjkq(j, l) == 1) {
-                                        _num5(i, c, l, h, r) += 1;
+                                    if (y(j, i + 3) == c) {
+                                        _num5(i, c, l, h, r) += _Prob3(j,l);
                                     }
                                 }
                             }
@@ -1343,12 +1333,13 @@ int main2(vector<vector<int>> yy){
             }
         }
 
+
         for (int l = 0; l < _L; l++) {
             _den5[l] = 0;
         }
         for (int l = 0; l < _L; l++) {
             for (int j = 0; j < _n; j++) {
-                _den5[l] += _xjkq(j, l);
+                _den5[l] += _Prob3(j, l);
             }
         }
 
@@ -1361,7 +1352,9 @@ int main2(vector<vector<int>> yy){
         for (int l = 0; l < _L; l++) {
             for (int r = 0; r < _R; r++) {
                 for (int j = 0; j < _n; j++) {
-                    _den6(l,r) += _zjq(j,r) * _xjkq(j, l);
+                    if(_zjq(j,r)==1) {
+                        _den6(l, r) +=_Prob3(j, l);
+                    }
                 }
             }
         }
@@ -1375,12 +1368,14 @@ int main2(vector<vector<int>> yy){
         for (int l = 0; l < _L; l++) {
             for (int h = 0; h < _H; h++) {
                 for (int j = 0; j < _n; j++) {
-                    _den7(l, h) += _wjk(j,h) * _xjkq(j, l);
+                    if(_wjk(j,h)==1) {
+                        _den7(l, h) += _Prob3(j, l);
+                    }
                 }
             }
         }
 
-        for (int i = 0; i < _I; i++) {
+      for (int i = 0; i < _I; i++) {
             for (int c = 0; c < _C; c++) {
                 for (int l = 0; l < _L; l++) {
                     for (int h = 0; h < _H; h++) {
