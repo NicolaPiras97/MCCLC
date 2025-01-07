@@ -1,3 +1,4 @@
+#Code for simulation scenario 2
 library(Rcpp)
 library(RcppEigen)
 library(RcppArmadillo)
@@ -11,8 +12,7 @@ Q <- 12
 ph <- c(0.2,0.3,0.5)
 pr <- c(0.4,0.6)
 
-pxwz<-matrix(c(0.4,0.3,0.2,0.1,0.15,0.05,0.35,0.45,0.05,0.55,0.15,0.25,0.3,0.05,0.5,0.15),nrow=H*R,ncol=L,byrow=T)
-pl<-matrix(c(0.4,0.05,0.3,0.55,0.2,0.15,0.1,0.25,0.15,0.3,0.05,0.05,0.35,0.5,0.45,0.15),nrow=L*H,ncol=R)
+pxwz<-matrix(c(0.4,0.3,0.2,0.1,0.15,0.10,0.35,0.40,0.15,0.35,0.20,0.30,0.3,0.10,0.40,0.20,0.30,0.35,0.15,0.20,0.05,0.25,0.40,0.30),nrow=H*R,ncol=L,byrow=T)
 
 c1=2
 c2=3
@@ -44,10 +44,8 @@ while(length(which(components2==1))!=round(Q*pr[1])){
 components2_out <- cbind(components2_out, components2)
 
 
-nk<-13 # scenario 1.1
-nq<-13
-#nk<-24 # scenario 1.2
-#nq<-24
+nk<-5
+nq<-5
 
 n=K*nk*Q
 
@@ -81,7 +79,7 @@ colr_out <- cbind(colr_out, colr)
 datacc<-datac[order(datac[,4],datac[,5]),]
 data<-datacc[,1:3]
 
-count<-c(length(which(components==1))*length(which(components2==1))*nk,length(which(components==1))*length(which(components2==2))*nk,length(which(components==2))*length(which(components2==1))*nk,length(which(components==2))*length(which(components2==2))*nk)
+count<-c(length(which(components==1))*length(which(components2==1))*nk,length(which(components==1))*length(which(components2==2))*nk,length(which(components==2))*length(which(components2==1))*nk,length(which(components==2))*length(which(components2==2))*nk,length(which(components==3))*length(which(components2==1))*nk,length(which(components==3))*length(which(components2==2))*nk)
 
 
 data2<-NULL
@@ -89,7 +87,7 @@ samples2 <- NULL
 w <- 1
 for(j in (1:H)){
   for(m in (1:R)){
-    samples <- sample(1:L,prob=c(pl[seq(j,H*L,H),m]),size=count[w],replace=TRUE) 
+    samples <- sample(1:L,prob=pxwz[w,],size=conteggio[w],replace=TRUE) 
     for(i in (1:count[w])){
       data2p = cbind(sample(0:(c1-1),prob=p1[,samples[i]],size=1),sample(0:(c1-1),prob=p2[,samples[i]],size=1),sample(0:(c2-1),prob=p3[,samples[i]],size=1),sample(0:(c2-1),prob=p4[,samples[i]],size=1),sample(0:(c3-1),prob=p5[,samples[i]],size=1),sample(0:(c3-1),prob=p6[,samples[i]],size=1))
       data2=rbind(data2,data2p)
