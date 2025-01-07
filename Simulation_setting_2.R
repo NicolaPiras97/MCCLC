@@ -30,14 +30,14 @@ S <- 100
 for(s in 1:S){
 
 components<-rep(0,K)
-while(length(which(components==1))!=round(K*ph[1])){
+while(length(which(components==1))!=round(K*ph[1])){ #remove for simulation scheme i. (random sampling of memberships of level-2 units)
   components <- sample(1:H,prob=ph,size=K,replace=TRUE)      
 }
 
 components_out <- cbind(components_out, components)
 
 components2<-rep(0,Q)
-while(length(which(components2==1))!=round(Q*pr[1])){
+while(length(which(components2==1))!=round(Q*pr[1])){ #remove for simulation scheme i. (random sampling of memberships of level-2 units)
   components2 <- sample(1:R,prob=pr,size=Q,replace=TRUE)      
 }
 
