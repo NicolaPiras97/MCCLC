@@ -34,14 +34,10 @@ while(length(which(components==1))!=round(K*ph[1])){ #remove for simulation sche
   components <- sample(1:H,prob=ph,size=K,replace=TRUE)      
 }
 
-components_out <- cbind(components_out, components)
-
 components2<-rep(0,Q)
 while(length(which(components2==1))!=round(Q*pr[1])){ #remove for simulation scheme i. (random sampling of memberships of level-2 units)
   components2 <- sample(1:R,prob=pr,size=Q,replace=TRUE)      
 }
-
-components2_out <- cbind(components2_out, components2)
 
 
 nk<-13 # scenario 1.1
