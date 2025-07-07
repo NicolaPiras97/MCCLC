@@ -69,9 +69,6 @@ for(i in 1:(K)){
 datac<-cbind(data,colh,colr)
 
 
-colh_out <- cbind(colh_out, colh)
-colr_out <- cbind(colr_out, colr)
-
 datacc<-datac[order(datac[,4],datac[,5]),]
 data<-datacc[,1:3]
 
