@@ -1439,12 +1439,12 @@ int main2(vector<vector<int>> yy){
             
             mu=mu+1;
 
-            //sommo le _p_h
+            
             for(int h=0;h<_H;h++){
                 _p_h_hat[h] +=_p_h[h];
             }
 
-            //sommo _p_r
+            
             for(int r=0;r<_R;r++){
                 _p_r_hat[r] +=_p_r[r];
             }
@@ -1457,7 +1457,7 @@ int main2(vector<vector<int>> yy){
               _p_rc_hat[r] += _p_rc[r];
             }
 
-            //sommo le _pi_l
+            
             for (int l = 0; l < _L; l++) {
                 for (int h = 0; h < _H; h++) {
                     for (int r = 0; r < _R; r++) {
@@ -1466,7 +1466,7 @@ int main2(vector<vector<int>> yy){
                 }
             }
 
-            //sommo le _p
+            
             for (int i = 0; i < _I; i++) {
                 for (int c = 0; c < _C; c++) {
                     for(int l=0;l<_L;l++){
@@ -1488,7 +1488,7 @@ int main2(vector<vector<int>> yy){
                 _p_h_hat[h]=(double)_p_h_hat[h]/(nn);
             }
 
-            cout<<"stime ph"<<endl;
+            cout<<"estimated ph"<<endl;
           
             for(int h=0;h<_H;h++){
               
@@ -1506,7 +1506,7 @@ int main2(vector<vector<int>> yy){
                 _p_r_hat[r]=(double)_p_r_hat[r]/(nn);
             }
 
-            cout<<"stime pr"<<endl;
+            cout<<"estimated pr"<<endl;
             
             for(int r=0;r<_R;r++){
               
@@ -1577,25 +1577,25 @@ int main2(vector<vector<int>> yy){
             cout << "_pi_l_hat(l,0,0)";
             cout << "\n";
             for (int l = 0; l < _L; l++) {
-                cout << _pi_l_hat(0,l, 0, 0) << ",";
+                cout << _pi_l_hat(l, 0, 0) << ",";
             }
             cout << "\n";
             cout << "_pi_l_hat(l,0,1)";
             cout << "\n";
             for (int l = 0; l < _L; l++) {
-                 cout << _pi_l_hat(0,l, 0, 1) << ",";
+                 cout << _pi_l_hat(l, 0, 1) << ",";
             }
             cout << "\n";
             cout << "_pi_l_hat(l,1,0)";
             cout << "\n";
             for (int l = 0; l < _L; l++) {
-                cout << _pi_l_hat(0,l, 1, 0) << ",";
+                cout << _pi_l_hat(l, 1, 0) << ",";
             }
             cout << "\n";
             cout << "_pi_l_hat(l,1,1)";
             cout << "\n";
             for (int l = 0; l < _L; l++) {
-                cout << _pi_l_hat(0,l, 1, 1) << ",";
+                cout << _pi_l_hat(l, 1, 1) << ",";
             }
             cout << "\n";
 
