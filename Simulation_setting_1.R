@@ -81,7 +81,7 @@ samples2 <- NULL
 w <- 1
 for(j in (1:H)){
   for(m in (1:R)){
-    samples <- sample(1:L,prob=pxwz[w,],size=conteggio[w],replace=TRUE) 
+    samples <- sample(1:L,prob=pxwz[w,],size=count[w],replace=TRUE) 
     for(i in (1:count[w])){
       data2p = cbind(sample(0:(c1-1),prob=p1[,samples[i]],size=1),sample(0:(c1-1),prob=p2[,samples[i]],size=1),sample(0:(c2-1),prob=p3[,samples[i]],size=1),sample(0:(c2-1),prob=p4[,samples[i]],size=1),sample(0:(c3-1),prob=p5[,samples[i]],size=1),sample(0:(c3-1),prob=p6[,samples[i]],size=1))
       data2=rbind(data2,data2p)
