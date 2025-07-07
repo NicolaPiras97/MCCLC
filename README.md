@@ -9,5 +9,4 @@ RcppArmadillo. The two versions of the estiamtion algorithm are available: Full 
 ## Citing us
 
 If you use our code in your academic project, please cite our paper using the following:
-......
-
+Columbu, S., Piras, N. & Vermunt, J.K. Multilevel latent class models for cross-classified categorical data: model definition and estimation through stochastic EM. Stat Comput 35, 50 (2025). https://doi.org/10.1007/s11222-025-10579-w
